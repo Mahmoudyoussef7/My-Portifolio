@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Business.Interfaces;
+using Data.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,18 +13,30 @@ namespace Web_App.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork<ProfileItem> _profileItem;
+        private readonly IUnitOfWork<Owner> _owner;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IUnitOfWork<Owner> owner,IUnitOfWork<ProfileItem> profileItem)
         {
-            _logger = logger;
+            _profileItem = profileItem;
+            _owner = owner;
         }
 
         public IActionResult Index()
         {
-            return View();
+            HomeVM model = new HomeVM
+            {
+                Owner = _owner.Entity.GetAll().FirstOrDefault(),
+                Items = _profileItem.Entity.GetAll().ToList()
+            };
+            return View(model);
         }
         public IActionResult About()
+        {
+            return View();
+        }
+        
+        public IActionResult Contact()
         {
             return View();
         }

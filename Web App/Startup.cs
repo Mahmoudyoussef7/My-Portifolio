@@ -1,3 +1,5 @@
+using Business.Classes;
+using Business.Interfaces;
 using Data.DbContainer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +32,8 @@ namespace Web_App
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("PortifolioDB"));
             });
+
+            services.AddScoped(typeof(IUnitOfWork<>),typeof(UnitOfWork<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
