@@ -9,6 +9,6 @@ namespace Business.Interfaces
     public interface IUnitOfWork<T> where T : class
     {
         IGenericRepo<T> Entity { get; }
-        void Save(T entity);
+        void Save();
     }
 }

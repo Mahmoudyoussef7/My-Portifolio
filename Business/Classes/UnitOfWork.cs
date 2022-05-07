@@ -29,7 +29,7 @@ namespace Business.Classes
         }
 
 
-        public void Save(T entity)
+        public void Save()
         {
             _data.SaveChanges();
         }

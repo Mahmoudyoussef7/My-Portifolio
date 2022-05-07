@@ -20,7 +20,7 @@ namespace Business.Repositories
             this.data = data;
             table=data.Set<T>();
         }
-        public void Delete(int id)
+        public void Delete(object id)
         {
             T Existed =  table.Find(id);
             table.Remove(Existed);
@@ -31,7 +31,7 @@ namespace Business.Repositories
             return table.ToList();
         }
 
-        public T GetById(int id)
+        public T GetById(object id)
         {
             return table.Find(id);
         }
